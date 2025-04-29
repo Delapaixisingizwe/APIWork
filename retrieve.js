@@ -1,0 +1,132 @@
+const express = require('express');
+const mysql = require('mysql2');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+
+const app = express();
+const port = 3000;
+const SECRET_KEY = 'your_jwt_secret_key_here'; // use a strong secret
+
+app.use(express.json());
+
+// ✅ MySQL connection
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'ecommerce_system'
+});
+
+connection.connect((err) => {
+  if (err) throw err;
+  console.log('Connected to the ecommerce_system database.');
+});
+
+// ✅ JWT Middleware (improved error handling)
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers['authorization'];
+  if (!authHeader) {
+    return res.status(401).json({ message: 'Authorization header missing' });
+  }
+
+  const token = authHeader.split(' ')[1];
+  if (!token) {
+    return res.status(401).json({ message: 'Token missing from header' });
+  }
+
+  jwt.verify(token, SECRET_KEY, (err, user) => {
+    if (err) {
+      console.error('JWT error:', err.message);
+      return res.status(403).json({ message: 'Invalid or expired token' });
+    }
+
+    req.user = user;
+    next();
+  });
+}
+
+// ✅ User Signup
+app.post('/signup', async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email and password required' });
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const query = 'INSERT INTO users (email, password) VALUES (?, ?)';
+
+  connection.query(query, [email, hashedPassword], (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('User registration failed');
+    }
+    res.status(201).send('User registered successfully');
+  });
+});
+
+// ✅ User Login
+app.post('/login', (req, res) => {
+  const { email, password } = req.body;
+
+  const query = 'SELECT * FROM users WHERE email = ?';
+  connection.query(query, [email], async (err, results) => {
+    if (err || results.length === 0) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+
+    const user = results[0];
+    const match = await bcrypt.compare(password, user.password);
+
+    if (!match) return res.status(401).json({ message: 'Invalid credentials' });
+
+    const token = jwt.sign(
+      { userId: user.id, email: user.email },
+      SECRET_KEY,
+      { expiresIn: '1h' } // ✅ extended from 30s to 1h
+    );
+
+    res.json({ token });
+  });
+});
+
+// ✅ Get All Products (Protected)
+app.get('/products', authenticateToken, (req, res) => {
+  connection.query('SELECT * FROM products', (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Failed to retrieve products');
+    }
+    res.json(results);
+  });
+});
+
+// ✅ Add Product (Protected)
+app.post('/products', authenticateToken, (req, res) => {
+  const { product_name, description, price, stock } = req.body;
+
+  if (!product_name || !description || price == null || stock == null) {
+    return res.status(400).send('All fields are required');
+  }
+
+  const query = `
+    INSERT INTO products (product_name, description, price, stock, created_at)
+    VALUES (?, ?, ?, ?, NOW())
+  `;
+
+  connection.query(query, [product_name, description, price, stock], (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Failed to add product');
+    }
+
+    res.status(201).json({
+      message: 'Product added successfully',
+      productId: results.insertId
+    });
+  });
+});
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
