@@ -1,25 +1,31 @@
+require('dotenv').config(); // Load .env at the top
+
 const express = require('express');
 const mysql = require('mysql2');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
 const app = express();
-const port = 3000;
-const SECRET_KEY = 'your_jwt_secret_key_here'; // use a strong secret
+const port = process.env.PORT || 3000;
+const SECRET_KEY = process.env.SECRET_KEY;
 
 app.use(express.json());
 
-// ✅ MySQL connection
+// ✅ MySQL connection using .env variables
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'ecommerce_system'
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT
 });
 
 connection.connect((err) => {
-  if (err) throw err;
-  console.log('Connected to the ecommerce_system database.');
+  if (err) {
+    console.error('Database connection error:', err);
+    process.exit(1);
+  }
+  console.log('Connected to the Clever Cloud MySQL database.');
 });
 
 // ✅ JWT Middleware (improved error handling)
@@ -83,7 +89,7 @@ app.post('/login', (req, res) => {
     const token = jwt.sign(
       { userId: user.id, email: user.email },
       SECRET_KEY,
-      { expiresIn: '1h' } // ✅ extended from 30s to 1h
+      { expiresIn: '1h' }
     );
 
     res.json({ token });
