@@ -28,17 +28,13 @@ connection.connect((err) => {
   console.log('Connected to the Clever Cloud MySQL database.');
 });
 
-// ✅ JWT Middleware (improved error handling)
+// ✅ JWT Middleware
 function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
-  if (!authHeader) {
-    return res.status(401).json({ message: 'Authorization header missing' });
-  }
+  if (!authHeader) return res.status(401).json({ message: 'Authorization header missing' });
 
   const token = authHeader.split(' ')[1];
-  if (!token) {
-    return res.status(401).json({ message: 'Token missing from header' });
-  }
+  if (!token) return res.status(401).json({ message: 'Token missing from header' });
 
   jwt.verify(token, SECRET_KEY, (err, user) => {
     if (err) {
@@ -54,19 +50,13 @@ function authenticateToken(req, res, next) {
 // ✅ User Signup
 app.post('/signup', async (req, res) => {
   const { email, password } = req.body;
-
-  if (!email || !password) {
-    return res.status(400).json({ message: 'Email and password required' });
-  }
+  if (!email || !password) return res.status(400).json({ message: 'Email and password required' });
 
   const hashedPassword = await bcrypt.hash(password, 10);
   const query = 'INSERT INTO users (email, password) VALUES (?, ?)';
 
-  connection.query(query, [email, hashedPassword], (err, results) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send('User registration failed');
-    }
+  connection.query(query, [email, hashedPassword], (err) => {
+    if (err) return res.status(500).send('User registration failed');
     res.status(201).send('User registered successfully');
   });
 });
@@ -77,9 +67,7 @@ app.post('/login', (req, res) => {
 
   const query = 'SELECT * FROM users WHERE email = ?';
   connection.query(query, [email], async (err, results) => {
-    if (err || results.length === 0) {
-      return res.status(401).json({ message: 'Invalid credentials' });
-    }
+    if (err || results.length === 0) return res.status(401).json({ message: 'Invalid credentials' });
 
     const user = results[0];
     const match = await bcrypt.compare(password, user.password);
@@ -89,26 +77,22 @@ app.post('/login', (req, res) => {
     const token = jwt.sign(
       { userId: user.id, email: user.email },
       SECRET_KEY,
-      { expiresIn: '1h' } // Increase this if needed (e.g., '6h', '12h', '7d')
+      { expiresIn: '1h' }
     );
-    
 
     res.json({ token });
   });
 });
 
-// ✅ Get All Products (Protected)
+// ✅ Get All Products
 app.get('/products', authenticateToken, (req, res) => {
   connection.query('SELECT * FROM products', (err, results) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send('Failed to retrieve products');
-    }
+    if (err) return res.status(500).send('Failed to retrieve products');
     res.json(results);
   });
 });
 
-// ✅ Add Product (Protected)
+// ✅ Add Product
 app.post('/products', authenticateToken, (req, res) => {
   const { product_name, description, price, stock } = req.body;
 
@@ -122,19 +106,12 @@ app.post('/products', authenticateToken, (req, res) => {
   `;
 
   connection.query(query, [product_name, description, price, stock], (err, results) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send('Failed to add product');
-    }
-
-    res.status(201).json({
-      message: 'Product added successfully',
-      productId: results.insertId
-    });
+    if (err) return res.status(500).send('Failed to add product');
+    res.status(201).json({ message: 'Product added successfully', productId: results.insertId });
   });
 });
 
-// ✅ Update Product (PUT)
+// ✅ Update Product (Full Update)
 app.put('/products/:id', authenticateToken, (req, res) => {
   const { id } = req.params;
   const { product_name, description, price, stock } = req.body;
@@ -150,39 +127,51 @@ app.put('/products/:id', authenticateToken, (req, res) => {
   `;
 
   connection.query(query, [product_name, description, price, stock, id], (err, results) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send('Failed to update product');
-    }
-
-    if (results.affectedRows === 0) {
-      return res.status(404).send('Product not found');
-    }
+    if (err) return res.status(500).send('Failed to update product');
+    if (results.affectedRows === 0) return res.status(404).send('Product not found');
 
     res.status(200).json({ message: 'Product updated successfully' });
   });
 });
 
-// ✅ Delete Product (DELETE)
+// ✅ Patch Product (Partial Update)
+app.patch('/products/:id', authenticateToken, (req, res) => {
+  const { id } = req.params;
+  const fields = req.body;
+
+  if (Object.keys(fields).length === 0) {
+    return res.status(400).send('No fields provided for update');
+  }
+
+  const keys = Object.keys(fields);
+  const values = Object.values(fields);
+  const updates = keys.map(key => `${key} = ?`).join(', ');
+
+  const query = `UPDATE products SET ${updates} WHERE id = ?`;
+
+  connection.query(query, [...values, id], (err, results) => {
+    if (err) return res.status(500).send('Failed to patch product');
+    if (results.affectedRows === 0) return res.status(404).send('Product not found');
+
+    res.status(200).json({ message: 'Product updated partially' });
+  });
+});
+
+// ✅ Delete Product
 app.delete('/products/:id', authenticateToken, (req, res) => {
   const { id } = req.params;
 
   const query = 'DELETE FROM products WHERE id = ?';
 
   connection.query(query, [id], (err, results) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send('Failed to delete product');
-    }
-
-    if (results.affectedRows === 0) {
-      return res.status(404).send('Product not found');
-    }
+    if (err) return res.status(500).send('Failed to delete product');
+    if (results.affectedRows === 0) return res.status(404).send('Product not found');
 
     res.status(200).json({ message: 'Product deleted successfully' });
   });
 });
 
+// ✅ Server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
