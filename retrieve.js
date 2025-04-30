@@ -161,11 +161,11 @@ app.patch('/products/:id', authenticateToken, (req, res) => {
 app.delete('/products/:id', authenticateToken, (req, res) => {
   const { id } = req.params;
 
-  const query = 'DELETE FROM products WHERE id = ?';
+  const query = 'DELETE FROM products WHERE product_id = ?'; // use correct column
 
   connection.query(query, [id], (err, results) => {
     if (err) {
-      console.error('MySQL Error:', err); // 🔍 more specific
+      console.error('MySQL Error:', err);
       return res.status(500).json({ message: 'Failed to delete product', error: err.message });
     }
 
@@ -176,6 +176,7 @@ app.delete('/products/:id', authenticateToken, (req, res) => {
     res.status(200).json({ message: 'Product deleted successfully' });
   });
 });
+
 
 
 // ✅ Server
