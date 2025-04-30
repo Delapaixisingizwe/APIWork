@@ -112,6 +112,7 @@ app.post('/products', authenticateToken, (req, res) => {
 });
 
 // ✅ Update Product (Full Update)
+// ✅ Update Product (PUT)
 app.put('/products/:id', authenticateToken, (req, res) => {
   const { id } = req.params;
   const { product_name, description, price, stock } = req.body;
@@ -123,16 +124,23 @@ app.put('/products/:id', authenticateToken, (req, res) => {
   const query = `
     UPDATE products
     SET product_name = ?, description = ?, price = ?, stock = ?
-    WHERE id = ?
+    WHERE product_id = ?
   `;
 
   connection.query(query, [product_name, description, price, stock, id], (err, results) => {
-    if (err) return res.status(500).send('Failed to update product');
-    if (results.affectedRows === 0) return res.status(404).send('Product not found');
+    if (err) {
+      console.error('MySQL Error:', err);
+      return res.status(500).json({ message: 'Failed to update product', error: err.message });
+    }
+
+    if (results.affectedRows === 0) {
+      return res.status(404).send('Product not found');
+    }
 
     res.status(200).json({ message: 'Product updated successfully' });
   });
 });
+
 
 // ✅ Patch Product (Partial Update)
 app.patch('/products/:id', authenticateToken, (req, res) => {
