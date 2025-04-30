@@ -133,6 +133,55 @@ app.post('/products', authenticateToken, (req, res) => {
   });
 });
 
+// ✅ Update Product (PUT)
+app.put('/products/:id', authenticateToken, (req, res) => {
+  const { id } = req.params;
+  const { product_name, description, price, stock } = req.body;
+
+  if (!product_name || !description || price == null || stock == null) {
+    return res.status(400).send('All fields are required');
+  }
+
+  const query = `
+    UPDATE products
+    SET product_name = ?, description = ?, price = ?, stock = ?
+    WHERE id = ?
+  `;
+
+  connection.query(query, [product_name, description, price, stock, id], (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Failed to update product');
+    }
+
+    if (results.affectedRows === 0) {
+      return res.status(404).send('Product not found');
+    }
+
+    res.status(200).json({ message: 'Product updated successfully' });
+  });
+});
+
+// ✅ Delete Product (DELETE)
+app.delete('/products/:id', authenticateToken, (req, res) => {
+  const { id } = req.params;
+
+  const query = 'DELETE FROM products WHERE id = ?';
+
+  connection.query(query, [id], (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Failed to delete product');
+    }
+
+    if (results.affectedRows === 0) {
+      return res.status(404).send('Product not found');
+    }
+
+    res.status(200).json({ message: 'Product deleted successfully' });
+  });
+});
+
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
