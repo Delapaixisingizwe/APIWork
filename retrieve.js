@@ -164,12 +164,19 @@ app.delete('/products/:id', authenticateToken, (req, res) => {
   const query = 'DELETE FROM products WHERE id = ?';
 
   connection.query(query, [id], (err, results) => {
-    if (err) return res.status(500).send('Failed to delete product');
-    if (results.affectedRows === 0) return res.status(404).send('Product not found');
+    if (err) {
+      console.error('MySQL Error:', err); // 🔍 more specific
+      return res.status(500).json({ message: 'Failed to delete product', error: err.message });
+    }
+
+    if (results.affectedRows === 0) {
+      return res.status(404).send('Product not found');
+    }
 
     res.status(200).json({ message: 'Product deleted successfully' });
   });
 });
+
 
 // ✅ Server
 app.listen(port, () => {
