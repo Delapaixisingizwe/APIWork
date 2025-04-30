@@ -89,8 +89,9 @@ app.post('/login', (req, res) => {
     const token = jwt.sign(
       { userId: user.id, email: user.email },
       SECRET_KEY,
-      { expiresIn: '1h' }
+      { expiresIn: '1h' } // Increase this if needed (e.g., '6h', '12h', '7d')
     );
+    
 
     res.json({ token });
   });
