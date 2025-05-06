@@ -48,18 +48,48 @@ function authenticateToken(req, res, next) {
 }
 
 // ✅ User Signup
+// ✅ Enhanced User Signup with Duplicate Email Check
 app.post('/signup', async (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password) return res.status(400).json({ message: 'Email and password required' });
+  try {
+    const { email, password } = req.body;
 
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const query = 'INSERT INTO users (email, password) VALUES (?, ?)';
+    // Validate input
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Email and password are required' });
+    }
 
-  connection.query(query, [email, hashedPassword], (err) => {
-    if (err) return res.status(500).send('User registration failed');
-    res.status(201).send('User registered successfully');
-  });
+    // Check if user already exists
+    const checkQuery = 'SELECT * FROM users WHERE email = ?';
+    connection.query(checkQuery, [email], async (err, results) => {
+      if (err) {
+        console.error('Database error:', err);
+        return res.status(500).json({ message: 'Database error' });
+      }
+
+      if (results.length > 0) {
+        return res.status(409).json({ message: 'Email already registered' });
+      }
+
+      // Hash the password
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      // Insert new user
+      const insertQuery = 'INSERT INTO users (email, password) VALUES (?, ?)';
+      connection.query(insertQuery, [email, hashedPassword], (insertErr) => {
+        if (insertErr) {
+          console.error('Insert error:', insertErr);
+          return res.status(500).json({ message: 'User registration failed' });
+        }
+
+        res.status(201).json({ message: 'User registered successfully' });
+      });
+    });
+  } catch (err) {
+    console.error('Unexpected error:', err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 });
+
 
 // ✅ User Login
 app.post('/login', (req, res) => {

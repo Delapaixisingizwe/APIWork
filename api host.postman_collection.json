@@ -1,0 +1,987 @@
+{
+	"info": {
+		"_postman_id": "0abf9190-3152-4e4d-b176-4b81d1fa92ed",
+		"name": "api host",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44053057"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlbGFwYWl4QGdtYWlsLmNvbSIsImlhdCI6MTc0NjAyMzg5OSwiZXhwIjoxNzQ2MDI3NDk5fQ.MF--lNPEE2ktmGsow6y1H0enAeVS7khYaiRWTlIDNF4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"delapaix@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apiwork-9gin.onrender.com/products/login",
+					"protocol": "https",
+					"host": [
+						"apiwork-9gin",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"products",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlbGFwYWl4QGdtYWlsLmNvbSIsImlhdCI6MTc0NjAyMzg5OSwiZXhwIjoxNzQ2MDI3NDk5fQ.MF--lNPEE2ktmGsow6y1H0enAeVS7khYaiRWTlIDNF4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"delapaix@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apiwork-9gin.onrender.com/products/login",
+					"protocol": "https",
+					"host": [
+						"apiwork-9gin",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"products",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"scott@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiwork-9gin.onrender.com/login",
+							"protocol": "https",
+							"host": [
+								"apiwork-9gin",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 30 Apr 2025 15:24:06 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "37"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"21-dBEoW0UmTF+EGUMaprEp9/8zNNA\""
+						},
+						{
+							"key": "rndr-id",
+							"value": "beea45f5-3520-4bfe"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "93880b4ceced4ec1-JNB"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Invalid credentials\"\n}"
+				}
+			]
+		},
+		{
+			"name": "https://apiwork-9gin.onrender.com/signup",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlbGFwYWl4QGdtYWlsLmNvbSIsImlhdCI6MTc0NjAyMzg5OSwiZXhwIjoxNzQ2MDI3NDk5fQ.MF--lNPEE2ktmGsow6y1H0enAeVS7khYaiRWTlIDNF4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"scott@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apiwork-9gin.onrender.com/login",
+					"protocol": "https",
+					"host": [
+						"apiwork-9gin",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "https://apiwork-9gin.onrender.com/signup",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"scott@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiwork-9gin.onrender.com/products",
+							"protocol": "https",
+							"host": [
+								"apiwork-9gin",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 30 Apr 2025 15:33:45 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "152"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"af-Zc8+KX4KbqtBOTBZANk+ob/uEJI\""
+						},
+						{
+							"key": "rndr-id",
+							"value": "4f695114-de70-4695"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "938819631d5e6c9c-JNB"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNjb3R0QGdtYWlsLmNvbSIsImlhdCI6MTc0NjAyNzIyNCwiZXhwIjoxNzQ2MDMwODI0fQ.QcHAU6KjqNymPbFrl05m7WWcwNIxmyGbe-OMv0itoFg\"\n}"
+				}
+			]
+		},
+		{
+			"name": "https://apiwork-9gin.onrender.com/products",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlbGFwYWl4QGdtYWlsLmNvbSIsImlhdCI6MTc0NjAyMzg5OSwiZXhwIjoxNzQ2MDI3NDk5fQ.MF--lNPEE2ktmGsow6y1H0enAeVS7khYaiRWTlIDNF4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"scott@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apiwork-9gin.onrender.com/products",
+					"protocol": "https",
+					"host": [
+						"apiwork-9gin",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "https://apiwork-9gin.onrender.com/products",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"scott@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiwork-9gin.onrender.com/products",
+							"protocol": "https",
+							"host": [
+								"apiwork-9gin",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 30 Apr 2025 15:35:30 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "284"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"3e0-v7kIzGa+x0Zk2yjFTVcZ15eddFU\""
+						},
+						{
+							"key": "rndr-id",
+							"value": "43da7209-936b-4cea"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "93881bfeeb414eb4-JNB"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"product_id\": 4,\n        \"product_name\": \"radios\",\n        \"description\": \"better for working\",\n        \"price\": \"50.00\",\n        \"stock\": 70998,\n        \"created_at\": \"2025-02-24T19:37:54.000Z\"\n    },\n    {\n        \"product_id\": 8,\n        \"product_name\": \"antiburokwe\",\n        \"description\": \"y3,imagine airtel and ikosora\",\n        \"price\": \"20000.00\",\n        \"stock\": 1234567890,\n        \"created_at\": \"2025-02-25T10:23:17.000Z\"\n    },\n    {\n        \"product_id\": 9,\n        \"product_name\": \"antiburoke\",\n        \"description\": \"y3,imagine airtel and ikosora,po2pluis\",\n        \"price\": \"20000.00\",\n        \"stock\": 1234567890,\n        \"created_at\": \"2025-02-25T10:25:48.000Z\"\n    },\n    {\n        \"product_id\": 10,\n        \"product_name\": \"wireshak\",\n        \"description\": \"better for working\",\n        \"price\": \"50.77\",\n        \"stock\": 709345678,\n        \"created_at\": \"2025-04-29T10:08:35.000Z\"\n    },\n    {\n        \"product_id\": 11,\n        \"product_name\": \"wireless keyyboard\",\n        \"description\": \"y3,imagine airtel and ikosora\",\n        \"price\": \"7000.00\",\n        \"stock\": 12345,\n        \"created_at\": \"2025-04-30T07:49:39.000Z\"\n    },\n    {\n        \"product_id\": 12,\n        \"product_name\": \"wireless keyyboard\",\n        \"description\": \"y3,imagine airtel and ikosora\",\n        \"price\": \"7000.00\",\n        \"stock\": 12345,\n        \"created_at\": \"2025-04-30T14:40:35.000Z\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "https://apiwork-9gin.onrender.com/products/12",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlbGFwYWl4QGdtYWlsLmNvbSIsImlhdCI6MTc0NjAyMzg5OSwiZXhwIjoxNzQ2MDI3NDk5fQ.MF--lNPEE2ktmGsow6y1H0enAeVS7khYaiRWTlIDNF4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n        \"product_name\": \"wireless keyboard\",\r\n        \"description\": \"y3,imagine airtel and ikosora\",\r\n        \"price\": \"7016000.00\",\r\n        \"stock\": 123412345675\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apiwork-9gin.onrender.com/products/12",
+					"protocol": "https",
+					"host": [
+						"apiwork-9gin",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"products",
+						"12"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "https://apiwork-9gin.onrender.com/products/12",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n        \"product_name\": \"wireless keyboard\",\r\n        \"description\": \"y3,imagine airtel and ikosora\",\r\n        \"price\": \"7016000.00\",\r\n        \"stock\": 123412345675\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiwork-9gin.onrender.com/products/12",
+							"protocol": "https",
+							"host": [
+								"apiwork-9gin",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"products",
+								"12"
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 30 Apr 2025 15:40:29 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "42"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"26-Xgv+GaqVb5MdihttTXhzczcstUY\""
+						},
+						{
+							"key": "rndr-id",
+							"value": "410546ad-43c1-469e"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "938823487cce9863-JNB"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Invalid or expired token\"\n}"
+				}
+			]
+		},
+		{
+			"name": "https://apiwork-9gin.onrender.com/products/4",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlbGFwYWl4QGdtYWlsLmNvbSIsImlhdCI6MTc0NjAyOTQ4MCwiZXhwIjoxNzQ2MDMzMDgwfQ.7QAq50oHsLzD0cAJix4RQ-3_DEHhoafWyYu1fwB6zU4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "   {\r\n    \"email\": \"delapaix@gmail.com\",\r\n    \"password\": \"123\"\r\n   }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apiwork-9gin.onrender.com/products/4",
+					"protocol": "https",
+					"host": [
+						"apiwork-9gin",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"products",
+						"4"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "https://apiwork-9gin.onrender.com/products/4",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "   {\r\n    \"email\": \"delapaix@gmail.com\",\r\n    \"password\": \"123\"\r\n   }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiwork-9gin.onrender.com/products/4",
+							"protocol": "https",
+							"host": [
+								"apiwork-9gin",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"products",
+								"4"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 30 Apr 2025 16:29:29 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "41"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"2a-a+2htZNpkCDaj0ausIFBiheaYZ4\""
+						},
+						{
+							"key": "rndr-id",
+							"value": "1daebe1c-40a7-4dfb"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "93886b123e90c6ca-JNB"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Product deleted successfully\"\n}"
+				}
+			]
+		},
+		{
+			"name": "https://apiwork-9gin.onrender.com/products/4",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlbGFwYWl4QGdtYWlsLmNvbSIsImlhdCI6MTc0NjAyOTQ4MCwiZXhwIjoxNzQ2MDMzMDgwfQ.7QAq50oHsLzD0cAJix4RQ-3_DEHhoafWyYu1fwB6zU4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "   {\r\n    \"email\": \"delapaix@gmail.com\",\r\n    \"password\": \"123\"\r\n   }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apiwork-9gin.onrender.com/products/4",
+					"protocol": "https",
+					"host": [
+						"apiwork-9gin",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"products",
+						"4"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "https://apiwork-9gin.onrender.com/products/4",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "   {\r\n    \"email\": \"delapaix@gmail.com\",\r\n    \"password\": \"123\"\r\n   }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiwork-9gin.onrender.com/products/4",
+							"protocol": "https",
+							"host": [
+								"apiwork-9gin",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"products",
+								"4"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 30 Apr 2025 16:30:14 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "21"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"11-mDvZIAY+AU+vAESXXtbmfRvaPSc\""
+						},
+						{
+							"key": "rndr-id",
+							"value": "48f1736f-f086-40e5"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "93886c275de6c6ca-JNB"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "Product not found"
+				}
+			]
+		},
+		{
+			"name": "https://apiwork-9gin.onrender.com/products/12",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlbGFwYWl4QGdtYWlsLmNvbSIsImlhdCI6MTc0NjAyOTQ4MCwiZXhwIjoxNzQ2MDMzMDgwfQ.7QAq50oHsLzD0cAJix4RQ-3_DEHhoafWyYu1fwB6zU4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "   {\r\n    \"product_name\": \"laptop1030\",\r\n        \"description\": \"gaming\",\r\n        \"price\": \"2000000.00\",\r\n        \"stock\": 123890\r\n   }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apiwork-9gin.onrender.com/products/12",
+					"protocol": "https",
+					"host": [
+						"apiwork-9gin",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"products",
+						"12"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "https://apiwork-9gin.onrender.com/products/12",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "   {\r\n    \"product_name\": \"laptop1030\",\r\n        \"description\": \"gaming\",\r\n        \"price\": \"2000000.00\",\r\n        \"stock\": 123890\r\n   }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiwork-9gin.onrender.com/products/12",
+							"protocol": "https",
+							"host": [
+								"apiwork-9gin",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"products",
+								"12"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 30 Apr 2025 16:40:07 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "43"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"2a-xkx5KN1R/KioLOUe4KCUrVOtulk\""
+						},
+						{
+							"key": "rndr-id",
+							"value": "e8cd1ba7-92b2-49a7"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "93887a9f6ca0750b-JNB"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Product updated successfully\"\n}"
+				}
+			]
+		}
+	]
+}
