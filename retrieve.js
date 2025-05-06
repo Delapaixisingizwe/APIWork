@@ -50,14 +50,16 @@ function authenticateToken(req, res, next) {
 // ✅ User Signup
 // ✅ Enhanced User Signup with Duplicate Email Check
 app.post('/signup', async (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password) return res.status(400).json({ message: 'Email and password required' });
+  const { username, email, password } = req.body;
+  if (!username || !email || !password) {
+    return res.status(400).json({ message: 'Username, email, and password are required' });
+  }
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const query = 'INSERT INTO users (email, password) VALUES (?, ?)';
+    const query = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
 
-    connection.query(query, [email, hashedPassword], (err) => {
+    connection.query(query, [username, email, hashedPassword], (err) => {
       if (err) {
         if (err.code === 'ER_DUP_ENTRY') {
           return res.status(409).json({ message: 'Email already registered' });
@@ -73,6 +75,7 @@ app.post('/signup', async (req, res) => {
     res.status(500).json({ message: 'Server error during registration' });
   }
 });
+
 
 
 // ✅ User Login
