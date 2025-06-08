@@ -4,11 +4,13 @@ const express = require('express');
 const mysql = require('mysql2');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const cors = require('cors'); // ✅ Added CORS
 
 const app = express();
 const port = process.env.PORT || 3000;
 const SECRET_KEY = process.env.SECRET_KEY;
 
+app.use(cors()); // ✅ Enable CORS for all routes
 app.use(express.json());
 
 // ✅ MySQL connection using .env variables
@@ -48,7 +50,6 @@ function authenticateToken(req, res, next) {
 }
 
 // ✅ User Signup
-// ✅ Enhanced User Signup with Duplicate Email Check
 app.post('/signup', async (req, res) => {
   const { username, email, password } = req.body;
   if (!username || !email || !password) {
@@ -75,8 +76,6 @@ app.post('/signup', async (req, res) => {
     res.status(500).json({ message: 'Server error during registration' });
   }
 });
-
-
 
 // ✅ User Login
 app.post('/login', (req, res) => {
@@ -128,7 +127,6 @@ app.post('/products', authenticateToken, (req, res) => {
   });
 });
 
-// ✅ Update Product (Full Update)
 // ✅ Update Product (PUT)
 app.put('/products/:id', authenticateToken, (req, res) => {
   const { id } = req.params;
@@ -158,7 +156,6 @@ app.put('/products/:id', authenticateToken, (req, res) => {
   });
 });
 
-
 // ✅ Patch Product (Partial Update)
 app.patch('/products/:id', authenticateToken, (req, res) => {
   const { id } = req.params;
@@ -186,7 +183,7 @@ app.patch('/products/:id', authenticateToken, (req, res) => {
 app.delete('/products/:id', authenticateToken, (req, res) => {
   const { id } = req.params;
 
-  const query = 'DELETE FROM products WHERE product_id = ?'; // use correct column
+  const query = 'DELETE FROM products WHERE product_id = ?';
 
   connection.query(query, [id], (err, results) => {
     if (err) {
@@ -202,9 +199,7 @@ app.delete('/products/:id', authenticateToken, (req, res) => {
   });
 });
 
-
-
-// ✅ Server
+// ✅ Server Start
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
